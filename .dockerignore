@@ -1,7 +1,0 @@
-.git
-tests
-instance
-*.db
-__pycache__
-.env
-venv
