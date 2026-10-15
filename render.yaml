@@ -1,0 +1,16 @@
+# Render Blueprint (Docker runtime with g++ installed -> real C++ compilation on the server, no external compiler API).
+services:
+  - type: web
+    name: codelab
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: EXECUTOR
+        value: local
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
