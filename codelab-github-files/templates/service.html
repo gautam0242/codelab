@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block body %}<div class="card"><h2>Execution service</h2>
+<p>Configured: <b>{{ 'yes' if info.configured else 'NO - set JUDGE0_URL (see README)' }}</b>{% if info.host %} · host <code>{{ info.host }}</code> · language id {{ info.language_id }} · auth: {{ info.auth }}{% endif %}</p>
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf }}"><button class="p">Test connection (verifies language id and runs a hello-world program)</button></form>
+{% if check %}<p class="{{ 'flash' if check.ok else 'errbox' }}">{{ 'Working' if check.ok else 'Problem' }}: {{ check.language }} {{ check.detail }}</p>{% endif %}
+<small>The API key is never shown. Student code runs only on this external service, never on the web server.</small></div>{% endblock %}

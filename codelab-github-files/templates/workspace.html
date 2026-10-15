@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}{{ a.title }} - CodeLab{% endblock %}{% block mc %}wide{% endblock %}{% block body %}
+<div class="split"><section class="card pane" aria-label="Problem"><h2>{{ a.title }}</h2><small>{{ a.unit }} · Deadline {{ a.deadline or '-' }}</small>
+<h4>Problem</h4><p style="white-space:pre-wrap">{{ a.description }}</p>
+{% if a.input_format %}<h4>Input format</h4><p style="white-space:pre-wrap">{{ a.input_format }}</p>{% endif %}{% if a.output_format %}<h4>Output format</h4><p style="white-space:pre-wrap">{{ a.output_format }}</p>{% endif %}
+{% if a.constraints_text %}<h4>Constraints</h4><p style="white-space:pre-wrap">{{ a.constraints_text }}</p>{% endif %}
+<h4>Sample cases</h4>{% for s in samples %}<b>Input</b><pre>{{ s.input }}</pre><b>Expected output</b><pre>{{ s.expected }}</pre>{% else %}<p class="mu">No sample cases.</p>{% endfor %}
+<p class="warn">{{ hidden_count }} hidden test case(s) are also used when you submit. Print only the required output (no prompts).</p>
+<h4>My attempts</h4><div class="tw"><table><thead><tr><th>#</th><th>Time (UTC)</th><th>Status</th><th>Tests</th></tr></thead><tbody id="history"><tr><td colspan="4">Loading…</td></tr></tbody></table></div></section>
+<section class="card pane" aria-label="Code editor"><div id="monaco" hidden></div><textarea id="ed" rows="16" spellcheck="false" aria-label="C++ code editor"></textarea>
+<small id="engine">Editor: basic text editor</small> <small id="notice" role="status" class="errbox" hidden></small>
+<label for="stdin">Standard input for Run</label><textarea id="stdin" rows="3" placeholder="Type the program input here"></textarea>
+<p><button class="s" id="run">Run</button> <button class="p" id="submit">Submit for assessment</button> <small>Run only executes your code. Submit saves it and checks all tests.</small></p>
+<div id="runout" aria-live="polite"></div><div id="subout" aria-live="polite"></div></section></div>
+<script id="page" type="application/json">{{ page|tojson }}</script><script id="csrfval" type="application/json">{{ csrf|tojson }}</script><script src="{{ url_for('static', filename='workspace.js') }}"></script>{% endblock %}

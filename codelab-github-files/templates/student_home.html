@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block body %}<h2>My Lab Assignments</h2>
+<div class="stats"><div class="card"><b>{{ total }}</b>Assigned</div><div class="card"><b>{{ attempted }}</b>Attempted</div><div class="card"><b>{{ passed }}</b>Passed</div><div class="card"><b>{{ pending }}</b>Awaiting evaluation</div></div>
+{% for unit, items in units.items() %}<div class="card"><h3>{{ unit }}</h3><div class="tw"><table><tr><th>Title</th><th>Deadline</th><th>Attempts</th><th>State</th><th></th></tr>
+{% for r in items %}<tr><td>{{ r.title }}</td><td>{{ r.deadline or '-' }}</td><td>{{ r.attempts }}</td><td>{% if r.passed %}<span class="b passed">passed</span>{% elif r.pending %}<span class="b pending">evaluating</span>{% elif r.attempts %}<span class="b failed">not passed yet</span>{% else %}<span class="mu">not started</span>{% endif %}</td><td><a class="btn" href="/assignment/{{ r.id }}">Open</a></td></tr>{% endfor %}</table></div></div>
+{% else %}<div class="card">No assignments yet. Your teacher will add some.</div>{% endfor %}
+<div class="card"><h3>Recent activity</h3>{% for e in recent %}<div>{{ e.created_at }} UTC - {{ e.type }} {% if e.title %}({{ e.title }}){% endif %}</div>{% else %}No activity yet.{% endfor %}</div>{% endblock %}

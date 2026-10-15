@@ -1,0 +1,6 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{% block title %}CodeLab{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head><body>
+{% if me %}<nav class="top" aria-label="Main"><b>CodeLab</b><span class="tag">Smart Campus demo</span>
+{% if role=='student' %}<a href="/student">Assignments</a><a href="/journey">Coding Journey</a>{% else %}<a href="/teacher">Dashboard</a><a href="/teacher/submissions">Submissions</a><a href="/teacher/assignment/new">New assignment</a><a href="/teacher/service">Execution service</a>{% endif %}
+<span class="sp"></span><span>{{ me }} ({{ role }})</span><form method="post" action="/logout"><input type="hidden" name="csrf_token" value="{{ csrf }}"><button>Log out</button></form></nav>{% endif %}
+<main class="{% block mc %}{% endblock %}">{% for m in get_flashed_messages() %}<div class="flash" role="status">{{ m }}</div>{% endfor %}{% block body %}{% endblock %}</main>
+<footer>CodeLab is a Smart Campus demo project, not an official university system. Demo accounts and sample data only.</footer></body></html>

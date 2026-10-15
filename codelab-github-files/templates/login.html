@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% block body %}<div class="card login"><h2>CodeLab</h2><p><i>Write Your Code. Prove Your Skills.</i></p>
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf }}"><label for="u">Username</label><input id="u" name="username" required autofocus autocomplete="username"><label for="p">Password</label><input id="p" name="password" type="password" required autocomplete="current-password"><p><button class="p">Log in</button></p></form>
+<div class="warn"><b>Demo accounts only</b> (public passwords, not for production).<br>Student: <code>student01</code> / <code>Student@123</code><br>Teacher: <code>teacher01</code> / <code>Teacher@123</code><br>Never enter real university credentials.</div></div>{% endblock %}
